@@ -1,4 +1,4 @@
-package net.valiantenvoy.campingmod;
+package net.valiantenvoy.terriblelizards;
 
 import java.util.List;
 
