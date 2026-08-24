@@ -1,6 +1,13 @@
 package net.valiantenvoy.terriblelizards;
 
-import net.valiantenvoy.terriblelizards.entity.TLEntities;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.valiantenvoy.terriblelizards.entity.client.NyctoRenderer;
+import net.valiantenvoy.terriblelizards.reg.TLEntities;
+import net.valiantenvoy.terriblelizards.reg.TLItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -27,7 +34,7 @@ public class TerribleLizards {
         modEventBus.addListener(this::commonSetup);
 
         NeoForge.EVENT_BUS.register(this);
-
+        TLItems.ITEMS.register(modEventBus);
         TLEntities.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
@@ -48,5 +55,14 @@ public class TerribleLizards {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @EventBusSubscriber(modid = TerribleLizards.MOD_ID, value = Dist.CLIENT)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            EntityRenderers.register(TLEntities.NYCTOSAURUS.get(), NyctoRenderer::new);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package net.valiantenvoy.terriblelizards.entity;
+package net.valiantenvoy.terriblelizards.reg;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
