@@ -6,18 +6,20 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.control.FlyingMoveControl;
-import net.minecraft.world.entity.ai.control.MoveControl;
-import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.valiantenvoy.terriblelizards.entity.ai.PrehistoricFlyingMoveControl;
+import net.valiantenvoy.terriblelizards.entity.ai.PrehistoricMoveControl;
+import net.valiantenvoy.terriblelizards.entity.ai.SmoothFlyingNavigation;
+import net.valiantenvoy.terriblelizards.entity.client.SmoothAnimationState;
 
-public abstract class FlyingMob extends Animal implements FlyingAnimal {
 
-    private static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(FlyingMob.class, EntityDataSerializers.BOOLEAN);
+
+public abstract class PrehistoricFlyingMob extends PrehistoricMob implements FlyingAnimal {
+
+    private static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(PrehistoricFlyingMob.class, EntityDataSerializers.BOOLEAN);
 
     public int flightTicks = 0;
     protected float flightPitch = 0.0F;
@@ -28,22 +30,22 @@ public abstract class FlyingMob extends Animal implements FlyingAnimal {
 
     public int stuckTicks = 0;
 
-  //  public final SmoothAnimationState flyAnimationState = new SmoothAnimationState();
-  //  public final SmoothAnimationState flyFastAnimationState = new SmoothAnimationState();
-  //  public final SmoothAnimationState hoverAnimationState = new SmoothAnimationState();
+    public final SmoothAnimationState flyAnimationState = new SmoothAnimationState();
+    public final SmoothAnimationState flyFastAnimationState = new SmoothAnimationState();
+    public final SmoothAnimationState hoverAnimationState = new SmoothAnimationState();
 
-    protected FlyingMob(EntityType<? extends FlyingMob> entityType, Level level) {
+    protected PrehistoricFlyingMob(EntityType<? extends PrehistoricFlyingMob> entityType, Level level) {
         super(entityType, level);
     }
 
     public void switchNavigator(boolean onLand) {
         if (onLand) {
-            this.moveControl = new MoveControl(this);
+            this.moveControl = new PrehistoricMoveControl(this);
             this.navigation = this.createNavigation(this.level());
             this.isLandNavigator = true;
         } else {
-            this.moveControl = new FlyingMoveControl(this, 1, false);
-            FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this, this.level()){
+            this.moveControl = new PrehistoricFlyingMoveControl(this);
+            SmoothFlyingNavigation flyingPathNavigation = new SmoothFlyingNavigation(this, this.level()){
                 @Override
                 public boolean isStableDestination(BlockPos blockPos) {
                     return !level().getBlockState(blockPos.below()).isAir();

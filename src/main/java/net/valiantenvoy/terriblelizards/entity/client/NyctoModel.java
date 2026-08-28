@@ -144,18 +144,19 @@ public class NyctoModel<T extends NyctoEntity> extends HierarchicalModel<T> {
     @Override
     public void setupAnim(NyctoEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.applyHeadRotation(netHeadYaw, headPitch);
+        float partialTicks = ageInTicks - entity.tickCount;
 
-        this.animateWalk(NyctoAnimations.walk, limbSwing, limbSwingAmount, 2f, 2.5f);
-        this.animate(entity.idleAnimationState, NyctoAnimations.idlepose, ageInTicks, 1f);
-    }
+       // this.animateSmooth(entity.idleAnimationState, NyctoAnimations.GROUD_IDLE, ageInTicks, partialTicks);
+       // this.animateSmooth(entity.flyAnimationState, NyctoAnimations.FLY, ageInTicks, partialTicks, 1.25F);
+       // this.animateSmooth(entity.flyFastAnimationState, NyctoAnimations.FLYFAST, ageInTicks, partialTicks);
 
-    private void applyHeadRotation(float headYaw, float headPitch) {
-        headYaw = Mth.clamp(headYaw, -30f, 30f);
-        headPitch = Mth.clamp(headPitch, -25f, 45);
+        float rollAmount = entity.getFlightRoll(partialTicks) / (180F / (float) Math.PI);
+        float flightPitchAmount = entity.getFlightPitch(partialTicks) / (180F / (float) Math.PI);
 
-        this.head.yRot = headYaw * ((float)Math.PI / 180f);
-        this.head.xRot = headPitch *  ((float)Math.PI / 180f);
+        if (entity.isFlying()) {
+            this.nyctosaurus.xRot += flightPitchAmount;
+            this.nyctosaurus.zRot += rollAmount;
+        }
     }
 
     @Override
