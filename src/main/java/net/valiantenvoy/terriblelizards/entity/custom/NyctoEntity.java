@@ -30,11 +30,6 @@ import java.util.EnumSet;
 @SuppressWarnings("deprecation")
 public class NyctoEntity extends PrehistoricFlyingMob {
 
-
-    public final SmoothAnimationState hangIdleAnimationState = new SmoothAnimationState();
-    public final SmoothAnimationState stretchAnimationState = new SmoothAnimationState();
-    public final SmoothAnimationState hangingStretchAnimationState = new SmoothAnimationState();
-
     public NyctoEntity(EntityType<? extends PrehistoricFlyingMob> entityType, Level level) {
         super(entityType, level);
         this.setPathfindingMalus(PathType.LEAVES, 0.0F);
@@ -99,14 +94,6 @@ public class NyctoEntity extends PrehistoricFlyingMob {
         super.travel(travelVec);
     }
 
-    public boolean canHangFrom(BlockPos pos, BlockState state) {
-        return state.isFaceSturdy(level(), pos, Direction.DOWN) && level().isEmptyBlock(pos.below()) && level().isEmptyBlock(pos.below(2));
-    }
-
-    public BlockPos posAbove() {
-        return BlockPos.containing(this.getX(), this.getBoundingBox().maxY + 0.1F, this.getZ());
-    }
-
     @Override
     protected void doPush(@NotNull Entity entity) {
     }
@@ -127,11 +114,10 @@ public class NyctoEntity extends PrehistoricFlyingMob {
     @Override
     public void setupAnimationStates() {
         this.idleAnimationState.animateWhen(!this.isFlying(), this.tickCount);
-        this.hangIdleAnimationState.animateWhen(!this.isFlying(), this.tickCount);
-        this.flyAnimationState.animateWhen(this.isFlying() && !this.isRunning(), this.tickCount);
-        this.flyFastAnimationState.animateWhen(this.isFlying() && this.isRunning(), this.tickCount);
-        this.stretchAnimationState.animateWhen(this.getIdleState() == 1, this.tickCount);
-        this.hangingStretchAnimationState.animateWhen(this.getIdleState() == 1, this.tickCount);
+        this.flyAnimationState.animateWhen(
+                this.isFlying() && !this.isRunning(),
+                this.tickCount
+        );
     }
 
     @Override
@@ -148,7 +134,7 @@ public class NyctoEntity extends PrehistoricFlyingMob {
         return null;
     }
 
-    // Goals
+
     private static class NyctoEntityFlyGoal extends Goal {
 
         private final NyctoEntity pterodactylus;

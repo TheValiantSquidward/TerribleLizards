@@ -14,7 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.valiantenvoy.terriblelizards.TerribleLizards;
 import net.valiantenvoy.terriblelizards.entity.custom.NyctoEntity;
 
-public class NyctoModel<T extends NyctoEntity> extends HierarchicalModel<T> {
+public class NyctoModel extends ModModel<NyctoEntity>  {
     public static final ModelLayerLocation LAYER_LOCATION =
             new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(TerribleLizards.MOD_ID, "nyctosaurus"), "main");
 
@@ -47,6 +47,7 @@ public class NyctoModel<T extends NyctoEntity> extends HierarchicalModel<T> {
     private final ModelPart leftleg;
 
     public NyctoModel(ModelPart root) {
+        super(0.5F, 24);
         this.nyctosaurus = root.getChild("nyctosaurus");
         this.nyctosaurusplatformcontrol2 = this.nyctosaurus.getChild("nyctosaurusplatformcontrol2");
         this.nyctosaurusplatformcontrol = this.nyctosaurusplatformcontrol2.getChild("nyctosaurusplatformcontrol");
@@ -146,9 +147,9 @@ public class NyctoModel<T extends NyctoEntity> extends HierarchicalModel<T> {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         float partialTicks = ageInTicks - entity.tickCount;
 
-       // this.animateSmooth(entity.idleAnimationState, NyctoAnimations.GROUD_IDLE, ageInTicks, partialTicks);
-       // this.animateSmooth(entity.flyAnimationState, NyctoAnimations.FLY, ageInTicks, partialTicks, 1.25F);
-       // this.animateSmooth(entity.flyFastAnimationState, NyctoAnimations.FLYFAST, ageInTicks, partialTicks);
+        this.animateSmooth(entity.idleAnimationState, NyctoAnimations.idlepose, ageInTicks, partialTicks);
+        this.animateSmooth(entity.flyAnimationState, NyctoAnimations.soar, ageInTicks, partialTicks, 1.25F);
+        this.animateSmooth(entity.flyFastAnimationState, NyctoAnimations.flap, ageInTicks, partialTicks);
 
         float rollAmount = entity.getFlightRoll(partialTicks) / (180F / (float) Math.PI);
         float flightPitchAmount = entity.getFlightPitch(partialTicks) / (180F / (float) Math.PI);

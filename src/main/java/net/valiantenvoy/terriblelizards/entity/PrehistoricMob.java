@@ -46,21 +46,8 @@ public abstract class PrehistoricMob extends Animal {
 
     protected static final EntityDataAccessor<Boolean> RUNNING = SynchedEntityData.defineId(PrehistoricMob.class, EntityDataSerializers.BOOLEAN);
 
-    protected int eepyTicks;
-
-    protected float bodyYaw;
-    protected float prevBodyYaw;
-    protected float tailYaw;
-    protected float prevTailYaw;
 
     public final SmoothAnimationState idleAnimationState = new SmoothAnimationState();
-    public final SmoothAnimationState swimAnimationState = new SmoothAnimationState();
-    public final SmoothAnimationState eepyAnimationState = new SmoothAnimationState(0.25F);
-    public final SmoothAnimationState sitAnimationState = new SmoothAnimationState(0.25F);
-    public final SmoothAnimationState eatAnimationState = new SmoothAnimationState(1.0F);
-
-    protected int idleAnimationCooldown;
-
 
     protected PrehistoricMob(EntityType<? extends PrehistoricMob> entityType, Level level) {
         super(entityType, level);
@@ -77,30 +64,16 @@ public abstract class PrehistoricMob extends Animal {
         builder.define(RUNNING, false);
     }
 
-    // Idle and attack states
-    public int getAttackState() {
-        return this.entityData.get(ATTACK_STATE);
-    }
-    public void setAttackState(int attackState) {
-        this.entityData.set(ATTACK_STATE, attackState);
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        this.setupAnimationStates();
     }
 
-    public int getIdleState() {
-        return this.entityData.get(IDLE_STATE);
-    }
-    public void setIdleState(int idleState) {
-        this.entityData.set(IDLE_STATE, idleState);
-    }
-
-    // Running
     public boolean isRunning() {
         return this.entityData.get(RUNNING);
     }
-    public void setRunning(boolean running) {
-        this.entityData.set(RUNNING, running);
-    }
 
-    // region navigation
     @Override
     protected BodyRotationControl createBodyControl() {
         return new PrehistoricBodyRotationControl(this);
@@ -116,7 +89,6 @@ public abstract class PrehistoricMob extends Animal {
         return 0.0F;
     }
 
-    // Floating
     @Override
     public double getFluidJumpThreshold() {
         if (this.isInWater() && this.horizontalCollision) {
@@ -125,7 +97,6 @@ public abstract class PrehistoricMob extends Animal {
         return 0.6D * this.getBbHeight();
     }
 
-    // region animations
     public void setupAnimationStates() {
     }
 
@@ -140,22 +111,6 @@ public abstract class PrehistoricMob extends Animal {
         return this.isBaby() ? 5.0F : 10.0F;
     }
 
-    public void setIdleAnimationCooldown(int animationCooldown) {
-        this.idleAnimationCooldown = animationCooldown;
-    }
-
-    public int getIdleAnimationCooldown() {
-        return this.idleAnimationCooldown;
-    }
-
-    public int getIdleAnimationCooldown(int idleState) {
-        return 0;
-    }
-    // endregion
-
-
-
-    // Persistence
     @Override
     public boolean requiresCustomPersistence() {
         return true;
@@ -164,23 +119,6 @@ public abstract class PrehistoricMob extends Animal {
     @Override
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
         return !this.requiresCustomPersistence();
-    }
-
-
-    // Tail
-    public void tickTailYaw(float maxYaw, float yawMultiplier) {
-        this.prevBodyYaw = this.bodyYaw;
-        this.bodyYaw += Mth.clamp(Mth.wrapDegrees(this.yBodyRot - this.bodyYaw) * yawMultiplier, -maxYaw, maxYaw);
-
-        this.prevTailYaw = this.tailYaw;
-        this.tailYaw = Mth.clamp(Mth.wrapDegrees(this.bodyYaw - this.yBodyRot), -maxYaw, maxYaw);
-    }
-
-    public float getTailYaw(float partialTicks) {
-        if (this.isPassenger()) {
-            return 0.0F;
-        }
-        return Mth.lerp(partialTicks, this.prevTailYaw, this.tailYaw);
     }
 
 }

@@ -8,22 +8,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.valiantenvoy.terriblelizards.TerribleLizards;
 import net.valiantenvoy.terriblelizards.entity.custom.NyctoEntity;
 
-public class NyctoRenderer extends MobRenderer<NyctoEntity, NyctoModel<NyctoEntity>> {
+public class NyctoRenderer extends MobRenderer<NyctoEntity, NyctoModel> {
+
     public NyctoRenderer(EntityRendererProvider.Context context) {
-        super(context, new NyctoModel<>(context.bakeLayer(NyctoModel.LAYER_LOCATION)), 0.25f);
+        super(context, new NyctoModel(context.bakeLayer(NyctoModel.LAYER_LOCATION)), 0.25F);
     }
 
     @Override
     public ResourceLocation getTextureLocation(NyctoEntity entity) {
         return ResourceLocation.fromNamespaceAndPath(TerribleLizards.MOD_ID, "textures/entity/nyctosaurus_medium.png");
-    }
-
-    @Override
-    public void render(NyctoEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-
-            poseStack.scale(1f, 1f, 1f);
-
-
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
     }
 }
