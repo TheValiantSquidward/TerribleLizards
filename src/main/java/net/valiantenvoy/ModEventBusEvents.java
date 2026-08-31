@@ -8,7 +8,9 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.valiantenvoy.terriblelizards.TerribleLizards;
 import net.valiantenvoy.terriblelizards.entity.client.NyctoModel;
+import net.valiantenvoy.terriblelizards.entity.client.PteranodonModel;
 import net.valiantenvoy.terriblelizards.entity.custom.NyctoEntity;
+import net.valiantenvoy.terriblelizards.entity.custom.PteranodonEntity;
 import net.valiantenvoy.terriblelizards.reg.TLEntities;
 
 @OnlyIn(Dist.CLIENT)
@@ -17,10 +19,12 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(NyctoModel.LAYER_LOCATION, NyctoModel::createBodyLayer);
+        event.registerLayerDefinition(PteranodonModel.LAYER_LOCATION, PteranodonModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(TLEntities.NYCTOSAURUS.get(), NyctoEntity.createAttributes().build());
+        event.put(TLEntities.PTERANODON.get(), PteranodonEntity.createAttributes().build());
     }
 }

@@ -6,6 +6,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.valiantenvoy.terriblelizards.entity.client.NyctoRenderer;
+import net.valiantenvoy.terriblelizards.entity.client.PteranodonRenderer;
 import net.valiantenvoy.terriblelizards.reg.TLEntities;
 import net.valiantenvoy.terriblelizards.reg.TLItems;
 import org.slf4j.Logger;
@@ -63,6 +64,7 @@ public class TerribleLizards {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(TLEntities.NYCTOSAURUS.get(), NyctoRenderer::new);
+            EntityRenderers.register(TLEntities.PTERANODON.get(), PteranodonRenderer::new);
         }
     }
 }
