@@ -171,7 +171,7 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
 
         this.animateSmooth(entity.idleAnimationState, NyctoAnimations.idlepose, ageInTicks, partialTicks);
         this.animateSmooth(entity.flyAnimationState, NyctoAnimations.soar, ageInTicks, partialTicks, 1.25F);
-        this.animateSmooth(entity.flyFastAnimationState, NyctoAnimations.flap, ageInTicks, partialTicks);
+        this.animateSmooth(entity.flapAnimationState, NyctoAnimations.flutter_blend, ageInTicks, partialTicks);
 
         float rollAmount = entity.getFlightRoll(partialTicks) / (180F / (float) Math.PI);
         float flightPitchAmount = entity.getFlightPitch(partialTicks) / (180F / (float) Math.PI);

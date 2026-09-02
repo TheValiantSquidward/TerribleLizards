@@ -1128,7 +1128,7 @@ public class NyctoAnimations {
                 ))
                 .build();
 
-        public static final AnimationDefinition takeoff = AnimationDefinition.Builder.withLength(0.5F).looping()
+        public static final AnimationDefinition takeoff = AnimationDefinition.Builder.withLength(0.5F)
                 .addAnimation("leftwing1", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(-32.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                         new Keyframe(0.5F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
@@ -1234,7 +1234,7 @@ public class NyctoAnimations {
                 ))
                 .build();
 
-        public static final AnimationDefinition landing = AnimationDefinition.Builder.withLength(0.5F).looping()
+        public static final AnimationDefinition landing = AnimationDefinition.Builder.withLength(0.5F)
                 .addAnimation("leftwing1", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                         new Keyframe(0.5F, KeyframeAnimations.degreeVec(-32.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)

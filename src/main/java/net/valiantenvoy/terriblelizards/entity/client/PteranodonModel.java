@@ -223,7 +223,7 @@ public class PteranodonModel extends ModModel<PteranodonEntity>  {
 
         this.animateSmooth(entity.idleAnimationState, PteranodonAnimations.idle, ageInTicks, partialTicks);
         this.animateSmooth(entity.flyAnimationState, PteranodonAnimations.soar, ageInTicks, partialTicks, 1.25F);
-        this.animateSmooth(entity.flyFastAnimationState, PteranodonAnimations.flap, ageInTicks, partialTicks);
+        this.animateSmooth(entity.flapAnimationState, PteranodonAnimations.flap, ageInTicks, partialTicks);
 
         float rollAmount = entity.getFlightRoll(partialTicks) / (180F / (float) Math.PI);
         float flightPitchAmount = entity.getFlightPitch(partialTicks) / (180F / (float) Math.PI);

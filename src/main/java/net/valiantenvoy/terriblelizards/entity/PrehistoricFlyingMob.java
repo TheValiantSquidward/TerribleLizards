@@ -31,8 +31,7 @@ public abstract class PrehistoricFlyingMob extends PrehistoricMob implements Fly
     public int stuckTicks = 0;
 
     public final SmoothAnimationState flyAnimationState = new SmoothAnimationState();
-    public final SmoothAnimationState flyFastAnimationState = new SmoothAnimationState();
-    public final SmoothAnimationState hoverAnimationState = new SmoothAnimationState();
+    public final SmoothAnimationState flapAnimationState = new SmoothAnimationState();
 
     protected PrehistoricFlyingMob(EntityType<? extends PrehistoricFlyingMob> entityType, Level level) {
         super(entityType, level);
@@ -82,10 +81,16 @@ public abstract class PrehistoricFlyingMob extends PrehistoricMob implements Fly
     @Override
     public void tick() {
         super.tick();
+
         if (this.canFly()) {
             this.tickFlight();
         }
-        this.tickRotation((float) (this.getDeltaMovement().y * 2.0F * -57.295776F));
+
+        this.tickFlapAnimation();
+
+        this.tickRotation(
+                (float) (this.getDeltaMovement().y * 2.0F * -57.295776F)
+        );
     }
 
     protected boolean shouldUseStuckTicks() {
@@ -152,6 +157,39 @@ public abstract class PrehistoricFlyingMob extends PrehistoricMob implements Fly
             }
         }
         this.flightRoll = Mth.clamp(flightRoll, -40.0F, 40.0F);
+    }
+
+    public int flapTicksRemaining = 0;
+    private int flapCooldown = 0;
+
+    protected int getFlapDuration() {
+        return 46;
+    }
+
+    protected int getFlapCooldown() {
+        return 40 + this.getRandom().nextInt(80);
+    }
+
+    protected void tickFlapAnimation() {
+        if (!this.level().isClientSide) {
+            return;
+        }
+
+        if (this.flapCooldown > 0) {
+            this.flapCooldown--;
+        }
+
+        if (this.flapTicksRemaining > 0) {
+            this.flapTicksRemaining--;
+        }
+
+        if (this.isFlying()
+                && this.flapTicksRemaining <= 0
+                && this.flapCooldown <= 0) {
+
+            this.flapTicksRemaining = this.getFlapDuration();
+            this.flapCooldown = this.getFlapCooldown();
+        }
     }
 
     @Override

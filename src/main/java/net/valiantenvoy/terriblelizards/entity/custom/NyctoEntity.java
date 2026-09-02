@@ -113,9 +113,18 @@ public class NyctoEntity extends PrehistoricFlyingMob {
 
     @Override
     public void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(!this.isFlying(), this.tickCount);
+        this.idleAnimationState.animateWhen(
+                !this.isFlying(),
+                this.tickCount
+        );
+
         this.flyAnimationState.animateWhen(
                 this.isFlying() && !this.isRunning(),
+                this.tickCount
+        );
+
+        this.flapAnimationState.animateWhen(
+                this.flapTicksRemaining > 0,
                 this.tickCount
         );
     }
