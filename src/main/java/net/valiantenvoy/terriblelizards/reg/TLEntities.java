@@ -21,7 +21,7 @@ public class TLEntities {
 
     public static final Supplier<EntityType<PteranodonEntity>> PTERANODON =
             ENTITY_TYPES.register("pteranodon", () -> EntityType.Builder.of(PteranodonEntity::new, MobCategory.CREATURE)
-                    .sized(0.75f, 0.35f).build("pteranodon"));
+                    .sized(1.75f, 1.35f).build("pteranodon"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

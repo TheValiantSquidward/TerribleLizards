@@ -8,10 +8,10 @@ import net.minecraft.client.animation.KeyframeAnimations;
 
 public class PteranodonAnimations {
     public static final AnimationDefinition idle = AnimationDefinition.Builder.withLength(8.0F)
-            .addAnimation("Pteranodon", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+            .addAnimation("root", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(35.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))
-            .addAnimation("Pteranodon", new AnimationChannel(AnimationChannel.Targets.POSITION,
+            .addAnimation("root", new AnimationChannel(AnimationChannel.Targets.POSITION,
                     new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, -7.0F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))
             .addAnimation("mainbody", new AnimationChannel(AnimationChannel.Targets.POSITION,
@@ -382,10 +382,10 @@ public class PteranodonAnimations {
             .build();
 
     public static final AnimationDefinition soar = AnimationDefinition.Builder.withLength(4.0F).looping()
-            .addAnimation("Pteranodon", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+            .addAnimation("root", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(90.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))
-            .addAnimation("Pteranodon", new AnimationChannel(AnimationChannel.Targets.POSITION,
+            .addAnimation("root", new AnimationChannel(AnimationChannel.Targets.POSITION,
                     new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, -11.0F, -4.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))
             .addAnimation("tailclosed", new AnimationChannel(AnimationChannel.Targets.SCALE,
