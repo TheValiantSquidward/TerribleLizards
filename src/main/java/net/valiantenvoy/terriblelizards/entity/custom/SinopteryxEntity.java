@@ -2,7 +2,6 @@ package net.valiantenvoy.terriblelizards.entity.custom;
 
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -28,19 +27,15 @@ import net.valiantenvoy.terriblelizards.entity.PrehistoricFlyingMob;
 import net.valiantenvoy.terriblelizards.entity.ai.PrehistoricFlyingMoveControl;
 import net.valiantenvoy.terriblelizards.entity.ai.PrehistoricMoveControl;
 import net.valiantenvoy.terriblelizards.entity.ai.SmoothFlyingNavigation;
-import net.valiantenvoy.terriblelizards.entity.client.SmoothAnimationState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
 @SuppressWarnings("deprecation")
-public class NyctoEntity extends PrehistoricFlyingMob {
+public class SinopteryxEntity extends PrehistoricFlyingMob {
 
-    private static final EntityDataAccessor<Integer> VARIANT =
-            SynchedEntityData.defineId(NyctoEntity.class, EntityDataSerializers.INT);
-
-    public NyctoEntity(EntityType<? extends PrehistoricFlyingMob> entityType, Level level) {
+    public SinopteryxEntity(EntityType<? extends PrehistoricFlyingMob> entityType, Level level) {
         super(entityType, level);
         this.setPathfindingMalus(PathType.LEAVES, 0.0F);
         this.switchNavigator(true);
@@ -49,14 +44,14 @@ public class NyctoEntity extends PrehistoricFlyingMob {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.01F)
+                .add(Attributes.MOVEMENT_SPEED, 0.5F)
                 .add(Attributes.FLYING_SPEED, 0.7F);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(3, new NyctoEntityFlyGoal(this));
+        this.goalSelector.addGoal(3, new SinopteryxEntityFlyGoal(this));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
     }
@@ -154,14 +149,14 @@ public class NyctoEntity extends PrehistoricFlyingMob {
     }
 
 
-    private static class NyctoEntityFlyGoal extends Goal {
+    private static class SinopteryxEntityFlyGoal extends Goal {
 
-        private final NyctoEntity pterodactylus;
+        private final SinopteryxEntity pterodactylus;
         private double x;
         private double y;
         private double z;
 
-        public NyctoEntityFlyGoal(NyctoEntity pterodactylus) {
+        public SinopteryxEntityFlyGoal(SinopteryxEntity pterodactylus) {
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
             this.pterodactylus = pterodactylus;
         }
@@ -247,42 +242,4 @@ public class NyctoEntity extends PrehistoricFlyingMob {
 
     }
 
-    /* VARIANT */
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(VARIANT, 0);
-    }
-
-    private int getTypeVariant() {
-        return this.entityData.get(VARIANT);
-    }
-
-    public NyctoVariant getVariant() {
-        return NyctoVariant.byId(this.getTypeVariant() & 255);
-    }
-
-    private void setVariant(NyctoVariant variant) {
-        this.entityData.set(VARIANT, variant.getId() & 255);
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("Variant", this.getTypeVariant());
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.entityData.set(VARIANT, compound.getInt("Variant"));
-    }
-
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty,
-                                        MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
-        NyctoVariant variant = Util.getRandom(NyctoVariant.values(), this.random);
-        this.setVariant(variant);
-        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
-    }
 }

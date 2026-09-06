@@ -1,9 +1,11 @@
 {
   "item.terriblelizards.raw_nyctosaurus": "Raw Nyctosaurus",
-  "item.terriblelizards.cooked_nyctosaurus": "Cooked Nyctosaurus",
+  "item.terriblelizards.cooked_nyctosaurus": "Cooked Pterosaur Bites",
   "item.terriblelizards.nyctosaurus_crest_small": "Small Nyctosaurus Crest",
   "item.terriblelizards.nyctosaurus_crest_medium": "Medium Nyctosaurus Crest",
   "item.terriblelizards.nyctosaurus_crest_large": "Large Nyctosaurus Crest",
 
-  "entity.terriblelizards.nyctosaurus": "Nyctosaurus"
+  "entity.terriblelizards.nyctosaurus": "Nyctosaurus",
+  "entity.terriblelizards.pteranodon": "Pteranodon",
+  "entity.terriblelizards.sinopteryx": "Sinopteryx"
 }

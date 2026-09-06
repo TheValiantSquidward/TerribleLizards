@@ -24,7 +24,6 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
     private final ModelPart body;
     private final ModelPart torso;
     private final ModelPart head;
-    private final ModelPart tailmembrane;
     private final ModelPart rightlimbs;
     private final ModelPart rightwing1;
     private final ModelPart rightarmmembrane;
@@ -54,7 +53,6 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
         this.body = this.nyctosaurusplatformcontrol.getChild("body");
         this.torso = this.body.getChild("torso");
         this.head = this.body.getChild("head");
-        this.tailmembrane = this.nyctosaurusplatformcontrol.getChild("tailmembrane");
         this.rightlimbs = this.nyctosaurusplatformcontrol.getChild("rightlimbs");
         this.rightwing1 = this.rightlimbs.getChild("rightwing1");
         this.rightarmmembrane = this.rightwing1.getChild("rightarmmembrane");
@@ -89,14 +87,15 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
 
         PartDefinition body = nyctosaurusplatformcontrol.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, -4.684F, -5.8794F));
 
-        PartDefinition torso = body.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(18, 22).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition torso = body.addOrReplaceChild("torso", CubeListBuilder.create().texOffs(18, 22).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 5.0F, new CubeDeformation(0.0F))
+                .texOffs(17, 40).addBox(-0.025F, -1.0F, 4.0F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(17, 40).addBox(0.025F, -1.0F, 4.0F, 0.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(18, 22).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(24, 0).addBox(-0.5F, -2.0F, -5.0F, 1.0F, 2.0F, 5.0F, new CubeDeformation(0.0F))
                 .texOffs(30, 7).addBox(-0.5F, -1.0F, -9.0F, 1.0F, 1.0F, 4.0F, new CubeDeformation(0.0F))
-                .texOffs(0, -10).addBox(0.0F, -22.0F, -2.0F, 0.0F, 20.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -1.0F));
-
-        PartDefinition tailmembrane = nyctosaurusplatformcontrol.addOrReplaceChild("tailmembrane", CubeListBuilder.create().texOffs(24, 19).addBox(-1.0F, 0.0F, 0.0F, 2.0F, 0.0F, 3.0F, new CubeDeformation(0.025F))
-                .texOffs(37, 15).addBox(-1.0F, 0.184F, 0.0F, 2.0F, 0.0F, 3.0F, new CubeDeformation(0.025F)), PartPose.offset(0.0F, -4.684F, -1.8794F));
+                .texOffs(0, -10).addBox(-0.025F, -22.0F, -2.0F, 0.0F, 20.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(0, -10).addBox(0.025F, -22.0F, -2.0F, 0.0F, 20.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -1.0F));
 
         PartDefinition rightlimbs = nyctosaurusplatformcontrol.addOrReplaceChild("rightlimbs", CubeListBuilder.create(), PartPose.offset(-1.0F, -4.684F, -5.8794F));
 
@@ -105,11 +104,11 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
                 .texOffs(26, 35).mirror().addBox(0.0F, 0.0F, 0.0F, 0.0F, 3.0F, 1.0F, new CubeDeformation(0.05F)).mirror(false)
                 .texOffs(53, 13).mirror().addBox(0.1F, 0.0F, 0.0F, 0.0F, 3.0F, 1.0F, new CubeDeformation(0.05F)).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition rightarmmembrane = rightwing1.addOrReplaceChild("rightarmmembrane", CubeListBuilder.create().texOffs(8, 28).mirror().addBox(0.0F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false)
-                .texOffs(10, 50).mirror().addBox(0.1F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 1.0F, 0.0F));
+        PartDefinition rightarmmembrane = rightwing1.addOrReplaceChild("rightarmmembrane", CubeListBuilder.create().texOffs(8, 28).mirror().addBox(0.0F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.025F)).mirror(false)
+                .texOffs(10, 50).mirror().addBox(0.1F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.025F)).mirror(false), PartPose.offset(0.0F, 1.0F, 0.0F));
 
-        PartDefinition rightmembrane1 = rightwing1.addOrReplaceChild("rightmembrane1", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(1.0F, -2.0F, -1.0F, 0.0F, 5.0F, 9.0F, new CubeDeformation(0.025F)).mirror(false)
-                .texOffs(1, 44).mirror().addBox(1.1F, -2.0F, -1.0F, 0.0F, 5.0F, 9.0F, new CubeDeformation(0.025F)).mirror(false), PartPose.offset(-1.0F, 2.0F, 0.0F));
+        PartDefinition rightmembrane1 = rightwing1.addOrReplaceChild("rightmembrane1", CubeListBuilder.create().texOffs(1, 23).mirror().addBox(1.0F, -2.0F, -1.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.025F)).mirror(false)
+                .texOffs(2, 45).mirror().addBox(1.1F, -2.0F, -1.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.025F)).mirror(false), PartPose.offset(-1.0F, 2.0F, 0.0F));
 
         PartDefinition rightcovermembrane = rightwing1.addOrReplaceChild("rightcovermembrane", CubeListBuilder.create().texOffs(30, 12).mirror().addBox(1.0F, -4.0F, 0.0F, 0.0F, 4.0F, 3.0F, new CubeDeformation(0.025F)).mirror(false)
                 .texOffs(44, 44).mirror().addBox(1.1F, -4.0F, 0.0F, 0.0F, 4.0F, 3.0F, new CubeDeformation(0.025F)).mirror(false), PartPose.offset(-1.0F, 3.0F, 1.0F));
@@ -126,7 +125,7 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
         PartDefinition rightmembrane3 = rightwing3.addOrReplaceChild("rightmembrane3", CubeListBuilder.create().texOffs(24, 7).mirror().addBox(0.0F, -1.0F, 0.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.025F)).mirror(false)
                 .texOffs(46, 25).mirror().addBox(0.1F, -1.0F, 0.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.025F)).mirror(false), PartPose.offset(0.0F, 1.0F, 0.0F));
 
-        PartDefinition rightleg = rightlimbs.addOrReplaceChild("rightleg", CubeListBuilder.create().texOffs(26, 29).mirror().addBox(1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.05F)).mirror(false)
+        PartDefinition rightleg = rightlimbs.addOrReplaceChild("rightleg", CubeListBuilder.create().texOffs(26, 29).mirror().addBox(0.99F, 0.0F, 0.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.05F)).mirror(false)
                 .texOffs(26, 39).mirror().addBox(1.1F, 0.0F, 0.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.05F)).mirror(false), PartPose.offset(-1.0F, 0.0F, 3.0F));
 
         PartDefinition leftlimbs = nyctosaurusplatformcontrol.addOrReplaceChild("leftlimbs", CubeListBuilder.create(), PartPose.offset(1.0F, -4.684F, -5.8794F));
@@ -136,8 +135,8 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
                 .texOffs(26, 35).addBox(0.0F, 0.0F, 0.0F, 0.0F, 3.0F, 1.0F, new CubeDeformation(0.05F))
                 .texOffs(53, 13).addBox(-0.1F, 0.0F, 0.0F, 0.0F, 3.0F, 1.0F, new CubeDeformation(0.05F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition leftmembrane1 = leftwing1.addOrReplaceChild("leftmembrane1", CubeListBuilder.create().texOffs(0, 22).addBox(1.0F, -2.0F, -1.0F, 0.0F, 5.0F, 9.0F, new CubeDeformation(0.025F))
-                .texOffs(1, 44).addBox(0.9F, -2.0F, -1.0F, 0.0F, 5.0F, 9.0F, new CubeDeformation(0.025F)), PartPose.offset(-1.0F, 2.0F, 0.0F));
+        PartDefinition leftmembrane1 = leftwing1.addOrReplaceChild("leftmembrane1", CubeListBuilder.create().texOffs(1, 23).addBox(1.0F, -2.0F, -1.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.025F))
+                .texOffs(2, 45).addBox(0.9F, -2.0F, -1.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.025F)), PartPose.offset(-1.0F, 2.0F, 0.0F));
 
         PartDefinition leftcovermembrane = leftwing1.addOrReplaceChild("leftcovermembrane", CubeListBuilder.create().texOffs(30, 12).addBox(1.0F, -4.0F, 0.0F, 0.0F, 4.0F, 3.0F, new CubeDeformation(0.025F))
                 .texOffs(44, 44).addBox(0.9F, -4.0F, 0.0F, 0.0F, 4.0F, 3.0F, new CubeDeformation(0.025F)), PartPose.offset(-1.0F, 3.0F, 1.0F));
@@ -154,10 +153,10 @@ public class NyctoModel extends ModModel<NyctoEntity>  {
         PartDefinition leftmembrane3 = leftwing3.addOrReplaceChild("leftmembrane3", CubeListBuilder.create().texOffs(24, 7).addBox(0.0F, -1.0F, 0.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.025F))
                 .texOffs(46, 25).addBox(-0.1F, -1.0F, 0.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.025F)), PartPose.offset(0.0F, 1.0F, 0.0F));
 
-        PartDefinition leftarmmembrane = leftwing1.addOrReplaceChild("leftarmmembrane", CubeListBuilder.create().texOffs(9, 50).addBox(-0.1F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
-                .texOffs(8, 28).addBox(0.0F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, 0.0F));
+        PartDefinition leftarmmembrane = leftwing1.addOrReplaceChild("leftarmmembrane", CubeListBuilder.create().texOffs(9, 50).addBox(-0.1F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.025F))
+                .texOffs(8, 28).addBox(0.0F, -1.0F, -1.0F, 0.0F, 2.0F, 1.0F, new CubeDeformation(0.025F)), PartPose.offset(0.0F, 1.0F, 0.0F));
 
-        PartDefinition leftleg = leftlimbs.addOrReplaceChild("leftleg", CubeListBuilder.create().texOffs(26, 29).addBox(1.0F, 0.0F, 0.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.05F))
+        PartDefinition leftleg = leftlimbs.addOrReplaceChild("leftleg", CubeListBuilder.create().texOffs(26, 29).addBox(1.01F, 0.0F, 0.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.05F))
                 .texOffs(26, 39).addBox(0.9F, 0.0F, 0.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.05F)), PartPose.offset(-1.0F, 0.0F, 3.0F));
 
         return LayerDefinition.create(meshdefinition, 64, 64);
