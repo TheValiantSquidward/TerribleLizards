@@ -1,6 +1,7 @@
 package net.valiantenvoy.terriblelizards;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -10,6 +11,7 @@ import net.valiantenvoy.terriblelizards.entity.client.PteranodonRenderer;
 import net.valiantenvoy.terriblelizards.entity.client.SinopteryxRenderer;
 import net.valiantenvoy.terriblelizards.reg.TLEntities;
 import net.valiantenvoy.terriblelizards.reg.TLItems;
+import net.valiantenvoy.terriblelizards.sound.ModSounds;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -24,6 +26,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
+import java.util.Locale;
+
 
 @Mod(TerribleLizards.MOD_ID)
 public class TerribleLizards {
@@ -37,11 +41,16 @@ public class TerribleLizards {
 
         NeoForge.EVENT_BUS.register(this);
         TLItems.ITEMS.register(modEventBus);
+        ModSounds.SOUND_EVENTS.register(modEventBus);
         TLEntities.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    public static ResourceLocation location(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path.toLowerCase(Locale.ROOT));
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

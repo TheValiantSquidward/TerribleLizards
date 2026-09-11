@@ -1,0 +1,22 @@
+{
+  "nycto_clack": {
+    "sounds": [
+      "terriblelizards:entity/click1",
+      "terriblelizards:entity/click2",
+      "terriblelizards:entity/click3",
+      "terriblelizards:entity/click4",
+      "terriblelizards:entity/click5",
+      "terriblelizards:entity/click6",
+      "terriblelizards:entity/click7"
+    ],
+    "subtitle": "subtitles.terriblelizards.nycto_clack"
+  },
+
+  "nycto_hiss": {
+    "sounds": [
+      "terriblelizards:entity/hiss1",
+      "terriblelizards:entity/hiss2"
+    ],
+    "subtitle": "subtitles.terriblelizards.nycto_hiss"
+  }
+}
