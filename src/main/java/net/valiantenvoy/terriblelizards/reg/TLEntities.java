@@ -9,6 +9,7 @@ import net.valiantenvoy.terriblelizards.TerribleLizards;
 import net.valiantenvoy.terriblelizards.entity.custom.NyctoEntity;
 import net.valiantenvoy.terriblelizards.entity.custom.PteranodonEntity;
 import net.valiantenvoy.terriblelizards.entity.custom.SinopteryxEntity;
+import net.valiantenvoy.terriblelizards.entity.custom.TyloEntity;
 
 import java.util.function.Supplier;
 
@@ -27,6 +28,10 @@ public class TLEntities {
     public static final Supplier<EntityType<PteranodonEntity>> PTERANODON =
             ENTITY_TYPES.register("pteranodon", () -> EntityType.Builder.of(PteranodonEntity::new, MobCategory.CREATURE)
                     .sized(1.75f, 1.35f).build("pteranodon"));
+
+    public static final Supplier<EntityType<TyloEntity>> TYLOSAURUS =
+            ENTITY_TYPES.register("tylosaurus", () -> EntityType.Builder.of(TyloEntity::new, MobCategory.CREATURE)
+                    .sized(1.75f, 1.35f).build("tylosaurus"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

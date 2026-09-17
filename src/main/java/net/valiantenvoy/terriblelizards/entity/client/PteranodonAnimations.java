@@ -8,6 +8,7 @@ import net.minecraft.client.animation.KeyframeAnimations;
 
 public class PteranodonAnimations {
     public static final AnimationDefinition idle = AnimationDefinition.Builder.withLength(8.0F)
+
             .addAnimation("root", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(35.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
             ))

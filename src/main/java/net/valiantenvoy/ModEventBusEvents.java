@@ -10,9 +10,11 @@ import net.valiantenvoy.terriblelizards.TerribleLizards;
 import net.valiantenvoy.terriblelizards.entity.client.NyctoModel;
 import net.valiantenvoy.terriblelizards.entity.client.PteranodonModel;
 import net.valiantenvoy.terriblelizards.entity.client.SinopteryxModel;
+import net.valiantenvoy.terriblelizards.entity.client.TyloModel;
 import net.valiantenvoy.terriblelizards.entity.custom.NyctoEntity;
 import net.valiantenvoy.terriblelizards.entity.custom.PteranodonEntity;
 import net.valiantenvoy.terriblelizards.entity.custom.SinopteryxEntity;
+import net.valiantenvoy.terriblelizards.entity.custom.TyloEntity;
 import net.valiantenvoy.terriblelizards.reg.TLEntities;
 
 @OnlyIn(Dist.CLIENT)
@@ -23,6 +25,7 @@ public class ModEventBusEvents {
         event.registerLayerDefinition(NyctoModel.LAYER_LOCATION, NyctoModel::createBodyLayer);
         event.registerLayerDefinition(SinopteryxModel.LAYER_LOCATION, SinopteryxModel::createBodyLayer);
         event.registerLayerDefinition(PteranodonModel.LAYER_LOCATION, PteranodonModel::createBodyLayer);
+        event.registerLayerDefinition(TyloModel.LAYER_LOCATION, TyloModel::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -30,5 +33,6 @@ public class ModEventBusEvents {
         event.put(TLEntities.NYCTOSAURUS.get(), NyctoEntity.createAttributes().build());
         event.put(TLEntities.SINOPTERYX.get(), SinopteryxEntity.createAttributes().build());
         event.put(TLEntities.PTERANODON.get(), PteranodonEntity.createAttributes().build());
+        event.put(TLEntities.TYLOSAURUS.get(), TyloEntity.createAttributes().build());
     }
 }

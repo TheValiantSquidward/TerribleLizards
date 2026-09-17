@@ -9,6 +9,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.valiantenvoy.terriblelizards.entity.client.NyctoRenderer;
 import net.valiantenvoy.terriblelizards.entity.client.PteranodonRenderer;
 import net.valiantenvoy.terriblelizards.entity.client.SinopteryxRenderer;
+import net.valiantenvoy.terriblelizards.entity.client.TyloRenderer;
 import net.valiantenvoy.terriblelizards.reg.TLEntities;
 import net.valiantenvoy.terriblelizards.reg.TLItems;
 import net.valiantenvoy.terriblelizards.sound.ModSounds;
@@ -76,6 +77,7 @@ public class TerribleLizards {
             EntityRenderers.register(TLEntities.NYCTOSAURUS.get(), NyctoRenderer::new);
             EntityRenderers.register(TLEntities.SINOPTERYX.get(), SinopteryxRenderer::new);
             EntityRenderers.register(TLEntities.PTERANODON.get(), PteranodonRenderer::new);
+            EntityRenderers.register(TLEntities.TYLOSAURUS.get(), TyloRenderer::new);
         }
     }
 }
